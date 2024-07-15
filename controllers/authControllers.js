@@ -160,25 +160,25 @@ export const updateAvatar = async (req, res) => {
   });
 };
 
-// export const checkAndUpdatePassword = async (req, res) => {
-//   const { currentPassword, newPassword } = req.body;
-//   const { _id } = req.user;
+export const checkAndUpdatePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const { _id } = req.user;
 
-//   const currentUser = await User.findById(_id);
-//   const passwordIsValid = await bcrypt.compare(currentPassword, currentUser.password);
-//   if (!passwordIsValid) {
-//     throw HttpError(401, 'Current password invalid');
-//   }
+  const currentUser = await User.findById(_id);
+  const passwordIsValid = await bcrypt.compare(currentPassword, currentUser.password);
+  if (!passwordIsValid) {
+    throw HttpError(401, 'Current password invalid');
+  }
 
-//   const hashNewPassword = await bcrypt.hash(newPassword, 10);
-//   const password = (currentUser.password = hashNewPassword);
-//   await User.findByIdAndUpdate(_id, { password });
+  const hashNewPassword = await bcrypt.hash(newPassword, 10);
+  const password = (currentUser.password = hashNewPassword);
+  await User.findByIdAndUpdate(_id, { password });
 
-//   res.status(200).json({
-//     message: 'Password updated successfully',
-//     user: {
-//       email: currentUser.email,
-//       subscription: currentUser.subscription,
-//     },
-//   });
-// };
+  res.status(200).json({
+    message: 'Password updated successfully',
+    user: {
+      email: currentUser.email,
+      subscription: currentUser.subscription,
+    },
+  });
+};
