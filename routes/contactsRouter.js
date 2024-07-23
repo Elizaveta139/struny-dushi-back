@@ -27,27 +27,27 @@ contactsRouter.get('/:id', authenticate, isValidId, cntrlWrapper(getOneContact))
 
 contactsRouter.delete('/:id', authenticate, isValidId, cntrlWrapper(deleteContact));
 
-contactsRouter.post(
-  '/',
-  authenticate,
-  validateBody(createContactSchema),
-  cntrlWrapper(createContact)
-);
+// contactsRouter.post(
+//   '/',
+//   authenticate,
+//   validateBody(createContactSchema),
+//   cntrlWrapper(createContact)
+// );
 
-contactsRouter.put(
-  '/:id',
-  authenticate,
-  isValidId,
-  validateBody(updateContactSchema),
-  cntrlWrapper(updateContact)
-);
+// contactsRouter.put(
+//   '/:id',
+//   authenticate,
+//   isValidId,
+//   validateBody(updateContactSchema),
+//   cntrlWrapper(updateContact)
+// );
 
-contactsRouter.patch(
-  '/:id/favorite',
-  authenticate,
-  isValidId,
-  validateBody(updateFavoriteSchema),
-  cntrlWrapper(updateStatusContact)
-);
+// contactsRouter.patch(
+//   '/:id/favorite',
+//   authenticate,
+//   isValidId,
+//   validateBody(updateFavoriteSchema),
+//   cntrlWrapper(updateStatusContact)
+// );
 
 export default contactsRouter;
