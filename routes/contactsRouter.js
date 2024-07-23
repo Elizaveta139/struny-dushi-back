@@ -34,13 +34,13 @@ contactsRouter.post(
   cntrlWrapper(createContact)
 );
 
-// contactsRouter.put(
-//   '/:id',
-//   authenticate,
-//   isValidId,
-//   validateBody(updateContactSchema),
-//   cntrlWrapper(updateContact)
-// );
+contactsRouter.put(
+  '/:id',
+  authenticate,
+  isValidId,
+  validateBody(updateContactSchema),
+  cntrlWrapper(updateContact)
+);
 
 contactsRouter.patch(
   '/:id/favorite',
