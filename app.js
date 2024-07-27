@@ -4,7 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-import notesRouter from './routes/contactsRouter.js';
+import notesRouter from './routes/notesRouter.js';
 import authRouter from './routes/authRouter.js';
 
 const app = express();
