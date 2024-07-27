@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.js';
 
-const noteSchema = new Schema(
+const notesSchema = new Schema(
   {
     name: {
       type: String,
@@ -26,6 +26,6 @@ const noteSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-noteSchema.post('save', handleMongooseError);
+notesSchema.post('save', handleMongooseError);
 
-export const Contact = model('note', noteSchema);
+export const Notes = model('note', notesSchema);
