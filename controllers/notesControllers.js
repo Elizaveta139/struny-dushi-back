@@ -80,3 +80,25 @@ export const updateStatusNotes = async (req, res) => {
   }
   res.status(200).json(result);
 };
+
+export const favoritesNotes = async (req, res) => {
+  // Знаходження файлів, які улюблені для поточного користувача
+  const { _id: owner } = req.user;
+  const filters = { owner };
+  const { favorite = null } = req.query;
+
+  if (favorite !== null) {
+    filters.favorite = favorite;
+  }
+
+  const favoriteFiles = await Notes.find(filters);
+  res.status(200).json(favoriteFiles);
+
+  // const { _id: owner } = req.user;
+  // const { id } = req.params;
+  // const result = await Notes.findByIdAndUpdate(id, { ...req.body, owner }, { new: true });
+  // if (!result) {
+  //   throw HttpError(404, 'Not found');
+  // }
+  // res.status(200).json(result);
+};

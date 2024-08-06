@@ -6,6 +6,7 @@ import {
   createNotes,
   updateNotes,
   updateStatusNotes,
+  favoritesNotes,
 } from '../controllers/notesControllers.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
@@ -22,6 +23,8 @@ import {
 const notesRouter = express.Router();
 
 notesRouter.get('/', cntrlWrapper(getAllNotes));
+
+notesRouter.get('/favorites', authenticate, cntrlWrapper(favoritesNotes));
 
 notesRouter.get('/:id', isValidId, cntrlWrapper(getOneNotes));
 

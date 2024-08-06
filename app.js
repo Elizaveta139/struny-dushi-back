@@ -15,6 +15,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+// Налаштування EJS як двигуна шаблонів
+app.set('view engine', 'ejs');
+//встановлюємо директорію для шаблонів EJS.
+app.set('views', path.join(__dirname, 'views'));
+
 app.use('/users', authRouter);
 app.use('/api/notes', notesRouter);
 
