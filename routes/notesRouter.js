@@ -23,7 +23,7 @@ const notesRouter = express.Router();
 
 notesRouter.get('/', cntrlWrapper(getAllNotes));
 
-notesRouter.get('/:id', authenticate, isValidId, cntrlWrapper(getOneNotes));
+notesRouter.get('/:id', isValidId, cntrlWrapper(getOneNotes));
 
 notesRouter.delete('/:id', authenticate, isValidId, cntrlWrapper(deleteNotes));
 

@@ -21,9 +21,15 @@ export const getAllNotes = async (req, res) => {
 };
 
 export const getOneNotes = async (req, res) => {
-  const { _id: owner } = req.user;
+  // const { _id: owner } = req.user;
+  // const { id } = req.params;
+  // const result = await Notes.findOne({ owner, _id: id });
+  // if (!result) {
+  //   throw HttpError(404, 'Not found');
+  // }
+  // res.status(200).json(result);
   const { id } = req.params;
-  const result = await Notes.findOne({ owner, _id: id });
+  const result = await Notes.findOne({ _id: id });
   if (!result) {
     throw HttpError(404, 'Not found');
   }
