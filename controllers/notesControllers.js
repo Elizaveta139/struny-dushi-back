@@ -16,7 +16,12 @@ export const getAllNotes = async (req, res) => {
   //   'email subscription'
   // );
   // res.status(200).json(result);
-  const result = await Notes.find();
+
+  //пагінація
+  const { page = 1, limit = 20, favorite = null } = req.query;
+  const skip = (page - 1) * limit;
+
+  const result = await Notes.find({}, null, { skip, limit });
   res.status(200).json(result);
 };
 
