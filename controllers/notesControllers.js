@@ -2,19 +2,21 @@ import HttpError from '../helpers/HttpError.js';
 import { Notes } from '../models/notesModel.js';
 
 export const getAllNotes = async (req, res) => {
-  const { _id: owner } = req.user;
-  const { page = 1, limit = 20, favorite = null } = req.query;
-  const skip = (page - 1) * limit;
-  const filters = { owner };
+  // const { _id: owner } = req.user; //owner - кожен користувач бачить тільки свої контакти
+  // const { page = 1, limit = 20, favorite = null } = req.query;
+  // const skip = (page - 1) * limit;
+  // const filters = { owner };
 
-  if (favorite !== null) {
-    filters.favorite = favorite;
-  }
+  // if (favorite !== null) {
+  //   filters.favorite = favorite;
+  // }
 
-  const result = await Notes.find(filters, '-createdAt -updatedAt', { skip, limit }).populate(
-    'owner',
-    'email subscription'
-  );
+  // const result = await Notes.find(filters, '-createdAt -updatedAt', { skip, limit }).populate(
+  //   'owner',
+  //   'email subscription'
+  // );
+  // res.status(200).json(result);
+  const result = await Notes.find();
   res.status(200).json(result);
 };
 

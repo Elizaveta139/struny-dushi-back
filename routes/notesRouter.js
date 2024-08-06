@@ -21,7 +21,7 @@ import {
 
 const notesRouter = express.Router();
 
-notesRouter.get('/', authenticate, cntrlWrapper(getAllNotes));
+notesRouter.get('/', cntrlWrapper(getAllNotes));
 
 notesRouter.get('/:id', authenticate, isValidId, cntrlWrapper(getOneNotes));
 
