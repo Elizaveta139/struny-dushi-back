@@ -26,7 +26,7 @@ const notesSchema = new Schema(
       type: String,
       enum: enumCategory,
       default: 'На кожен день',
-      required: [true, 'Select a category'],
+      // required: [true, 'Select a category'],
     },
     favorite: {
       type: Boolean,
