@@ -12,6 +12,7 @@ import {
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { uploadPdf } from '../middlewares/uploadPdf.js';
 import { cntrlWrapper } from '../helpers/cntrlWrapper.js';
 
 import {
@@ -30,7 +31,15 @@ notesRouter.get('/:id', isValidId, cntrlWrapper(getOneNotes));
 
 notesRouter.delete('/:id', authenticate, isValidId, cntrlWrapper(deleteNotes));
 
-notesRouter.post('/', authenticate, validateBody(createNotesSchema), cntrlWrapper(createNotes));
+notesRouter.post(
+  '/',
+  authenticate,
+  uploadPdf,
+  validateBody(createNotesSchema),
+  cntrlWrapper(createNotes)
+);
+
+// notesRouter.post('/', authenticate, validateBody(createNotesSchema), cntrlWrapper(createNotes));
 
 notesRouter.put(
   '/:id',

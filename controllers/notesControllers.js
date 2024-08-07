@@ -1,5 +1,8 @@
+import path from 'path';
+
 import HttpError from '../helpers/HttpError.js';
 import { Notes } from '../models/notesModel.js';
+import { googleDriveService } from '../service/googleDriveService.js';
 
 export const getAllNotes = async (req, res) => {
   // const { _id: owner } = req.user; //owner - кожен користувач бачить тільки свої контакти
@@ -51,9 +54,24 @@ export const deleteNotes = async (req, res) => {
   res.status(200).json(result);
 };
 
+// export const createNotes = async (req, res) => {
+//   const { _id: owner } = req.user;
+//   const result = await Notes.create({ ...req.body, owner });
+//   res.status(201).json(result);
+// };
+
 export const createNotes = async (req, res) => {
+  // Upload file to Google Drive
+  const fileData = await googleDriveService(req.file.path);
   const { _id: owner } = req.user;
-  const result = await Notes.create({ ...req.body, owner });
+
+  // Create the contact with the file URL
+  const result = await Notes.create({
+    ...req.body,
+    owner,
+    pdfUrl: `https://drive.google.com/uc?export=view&id=${fileData.id}`,
+  });
+
   res.status(201).json(result);
 };
 

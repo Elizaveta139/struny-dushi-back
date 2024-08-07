@@ -2,10 +2,10 @@ import fs from 'fs';
 import { google } from 'googleapis';
 import path from 'path';
 
-const CLIENT_ID = 'YOUR_CLIENT_ID';
-const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
-const REDIRECT_URI = 'YOUR_REDIRECT_URI';
-const REFRESH_TOKEN = 'YOUR_REFRESH_TOKEN';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
@@ -16,7 +16,7 @@ const drive = google.drive({
   auth: oauth2Client,
 });
 
-export const uploadFile = async filePath => {
+export const googleDriveService = async filePath => {
   try {
     const response = await drive.files.create({
       requestBody: {
