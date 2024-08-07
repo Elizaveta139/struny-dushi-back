@@ -18,11 +18,12 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
+      required: true,
     },
     subscription: {
       type: String,
       enum: enumValue,
-      default: 'starter',
+      default: 'user',
     },
     verify: {
       type: Boolean,

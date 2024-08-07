@@ -1,17 +1,32 @@
 import { model, Schema } from 'mongoose';
 import { handleMongooseError } from '../helpers/handleMongooseError.js';
+import { enumCategory } from '../helpers/schemeSettings.js';
 
 const notesSchema = new Schema(
   {
-    name: {
+    // name: {
+    //   type: String,
+    //   required: [true, 'Set name for contact'],
+    // },
+    // email: {
+    //   type: String,
+    // },
+    // phone: {
+    //   type: String,
+    // },
+    title: {
       type: String,
-      required: [true, 'Set name for contact'],
+      required: [true, 'Enter a name'],
     },
-    email: {
+    fileURL: {
       type: String,
+      required: true,
     },
-    phone: {
+    category: {
       type: String,
+      enum: enumCategory,
+      default: 'На кожен день',
+      required: [true, 'Select a category'],
     },
     favorite: {
       type: Boolean,

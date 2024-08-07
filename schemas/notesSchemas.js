@@ -1,15 +1,19 @@
 import Joi from 'joi';
 
+import { enumCategory } from '../helpers/schemeSettings.js';
+
 export const createNotesSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
-  email: Joi.string().email().required(),
-  phone: Joi.string().min(6).required(),
+  title: Joi.string().min(2).max(30).required(),
+  fileURL: Joi.string().required(),
+  category: Joi.string()
+    .valid(...enumCategory)
+    .required(),
 });
 
 export const updateNotesSchema = Joi.object({
-  name: Joi.string(),
-  email: Joi.string().email(),
-  phone: Joi.string(),
+  title: Joi.string(),
+  fileURL: Joi.string(),
+  category: Joi.string().valid(...enumCategory),
 });
 
 export const updateFavoriteSchema = Joi.object({

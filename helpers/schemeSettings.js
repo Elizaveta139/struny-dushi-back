@@ -1,3 +1,14 @@
-export const enumValue = ['starter', 'pro', 'business'];
+export const enumValue = ['user', 'admin'];
 
 export const emailRegexp = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+
+export const enumCategory = [
+  'Різдво',
+  'Новий Рік',
+  'Трійця',
+  'Жатва',
+  'Пасха',
+  'Вечеря',
+  'Дні народження',
+  'На кожен день',
+];

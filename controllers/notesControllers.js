@@ -84,21 +84,9 @@ export const updateStatusNotes = async (req, res) => {
 export const favoritesNotes = async (req, res) => {
   // Знаходження файлів, які улюблені для поточного користувача
   const { _id: owner } = req.user;
-  const filters = { owner };
-  const { favorite = null } = req.query;
+  const { favorite } = req.params;
 
-  if (favorite !== null) {
-    filters.favorite = favorite;
-  }
-
-  const favoriteFiles = await Notes.find(filters);
-  res.status(200).json(favoriteFiles);
-
-  // const { _id: owner } = req.user;
-  // const { id } = req.params;
-  // const result = await Notes.findByIdAndUpdate(id, { ...req.body, owner }, { new: true });
-  // if (!result) {
-  //   throw HttpError(404, 'Not found');
-  // }
-  // res.status(200).json(result);
+  const favoriteNotes = await Notes.find({ owner, favorite: true });
+  // const favoriteNotes = await Notes.find({ favorite: true });
+  res.status(200).json(favoriteNotes);
 };
