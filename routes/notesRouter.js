@@ -34,7 +34,7 @@ notesRouter.delete('/:id', authenticate, isValidId, cntrlWrapper(deleteNotes));
 notesRouter.post(
   '/',
   authenticate,
-  uploadPdf,
+  uploadPdf.single('fileURL'),
   validateBody(createNotesSchema),
   cntrlWrapper(createNotes)
 );

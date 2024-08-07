@@ -9,7 +9,6 @@ import { nanoid } from 'nanoid';
 import HttpError from '../helpers/HttpError.js';
 import { sendEmail } from '../helpers/sendEmail.js';
 import { User } from '../models/userModel.js';
-import { log } from 'console';
 
 const avatarsDir = path.resolve('public', 'avatars');
 
