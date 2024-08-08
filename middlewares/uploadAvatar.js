@@ -10,6 +10,6 @@ const multerConfig = multer.diskStorage({
   },
 });
 
-export const upload = multer({
+export const uploadAvatar = multer({
   storage: multerConfig,
 });

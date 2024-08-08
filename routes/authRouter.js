@@ -2,7 +2,7 @@ import express from 'express';
 
 import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { upload } from '../middlewares/upload.js';
+import { uploadAvatar } from '../middlewares/upload.js';
 import { cntrlWrapper } from '../helpers/cntrlWrapper.js';
 
 import {
@@ -45,7 +45,12 @@ authRouter.patch(
   cntrlWrapper(updateSubscription)
 );
 
-authRouter.patch('/avatars', authenticate, upload.single('avatar'), cntrlWrapper(updateAvatar));
+authRouter.patch(
+  '/avatars',
+  authenticate,
+  uploadAvatar.single('avatar'),
+  cntrlWrapper(updateAvatar)
+);
 
 authRouter.patch(
   '/password',
