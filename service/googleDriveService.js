@@ -10,6 +10,7 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 
 oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+// oauth2Client.setCredentials = { refresh_token: REFRESH_TOKEN };
 
 const drive = google.drive({
   version: 'v3',
@@ -29,6 +30,7 @@ export const googleDriveService = async filePath => {
       },
     });
 
+    console.log('File uploaded:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error uploading file to Google Drive', error);

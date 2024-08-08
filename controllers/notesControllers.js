@@ -61,7 +61,6 @@ export const deleteNotes = async (req, res) => {
 export const createNotes = async (req, res) => {
   // Загрузка файла в Google Drive
   const fileData = await googleDriveService(req.file.path);
-  console.log('fileData', fileData);
 
   const { _id: owner } = req.user;
 

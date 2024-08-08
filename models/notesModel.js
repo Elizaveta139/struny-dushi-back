@@ -20,7 +20,7 @@ const notesSchema = new Schema(
     },
     fileURL: {
       type: String,
-      required: true,
+      required: [true, 'Add file'],
     },
     category: {
       type: String,

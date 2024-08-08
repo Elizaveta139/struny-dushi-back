@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
+import { google } from 'googleapis';
 
 import notesRouter from './routes/notesRouter.js';
 import authRouter from './routes/authRouter.js';
@@ -11,6 +12,32 @@ import { globalErrorHandler } from './helpers/globalErrorHandler.js';
 
 const app = express();
 dotenv.config();
+
+///////////////////
+
+// const CLIENT_ID = process.env.CLIENT_ID;
+// const CLIENT_SECRET = process.env.CLIENT_SECRET;
+// const REDIRECT_URI = process.env.REDIRECT_URI;
+
+// const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+
+// const code =
+//   '4/0AcvDMrDWnHSS5-CmzLmT6ywxTJSWOOL_ssP2DdTMNOurzYIxgRsonExb1aIuvpnwLqJOrA&scope=https://www.googleapis.com/auth/drive.file';
+// const authUrl = oauth2Client.generateAuthUrl({
+//   access_type: 'offline',
+//   scope: ['https://www.googleapis.com/auth/drive.file'],
+//   redirect_uri: REDIRECT_URI,
+// });
+
+// console.log('Authorize this app by visiting this url:', authUrl);
+
+// async function getToken() {
+//   const { tokens } = await oauth2Client.getToken(code);
+//   console.log('Access Token:', tokens.access_token);
+//   console.log('Refresh Token:', tokens.refresh_token);
+// }
+
+// getToken();
 
 // MIDDLEWARE =====================
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));

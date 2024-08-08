@@ -2,7 +2,7 @@ import express from 'express';
 
 import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
-import { uploadAvatar } from '../middlewares/upload.js';
+import { uploadAvatar } from '../middlewares/uploadAvatar.js';
 import { cntrlWrapper } from '../helpers/cntrlWrapper.js';
 
 import {

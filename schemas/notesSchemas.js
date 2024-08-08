@@ -4,13 +4,13 @@ import { enumCategory } from '../helpers/schemeSettings.js';
 
 export const createNotesSchema = Joi.object({
   title: Joi.string().min(2).max(30).required(),
-  fileURL: Joi.string().required(),
+  fileURL: Joi.string().valid('application/pdf').required(),
   category: Joi.string().valid(...enumCategory),
 });
 
 export const updateNotesSchema = Joi.object({
   title: Joi.string(),
-  fileURL: Joi.string(),
+  fileURL: Joi.string().valid('application/pdf'),
   category: Joi.string().valid(...enumCategory),
 });
 
