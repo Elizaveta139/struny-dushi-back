@@ -3,8 +3,9 @@ import Joi from 'joi';
 import { enumCategory } from '../helpers/schemeSettings.js';
 
 export const createNotesSchema = Joi.object({
-  title: Joi.string().min(2).max(30).required(),
-  fileURL: Joi.string().valid('application/pdf').required(),
+  title: Joi.string().required(),
+  // fileURL: Joi.valid('application/pdf').required(),
+  // fileURL: Joi.string().uri().required(),
   category: Joi.string().valid(...enumCategory),
 });
 

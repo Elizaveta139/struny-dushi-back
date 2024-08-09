@@ -1,6 +1,7 @@
 import HttpError from '../helpers/HttpError.js';
 import { Notes } from '../models/notesModel.js';
 import { googleDriveService } from '../service/googleDriveService.js';
+import { ValidateSheme } from '../middlewares/ValidateSheme.js';
 
 export const getAllNotes = async (req, res) => {
   // const { _id: owner } = req.user; //owner - кожен користувач бачить тільки свої контакти
@@ -59,6 +60,25 @@ export const deleteNotes = async (req, res) => {
 // };
 
 export const createNotes = async (req, res) => {
+  // ValidateSheme();
+
+  // // Если файл был загружен, загружаем его на Google Drive
+  // let fileURL = null;
+  // if (req.file) {
+  //   const fileData = await googleDriveService(req.file.path);
+  //   fileURL = `https://drive.google.com/uc?export=view&id=${fileData.id}`;
+
+  //   // Создание записи в базе данных
+  //   const { _id: owner } = req.user;
+  //   const note = await Notes.create({
+  //     title: req.body.title,
+  //     fileURL: fileURL || req.file.path, // Сохраняем URL файла
+  //     category: req.body.category,
+  //     owner,
+  //   });
+  //   res.status(201).json(note);
+  // }
+
   // Загрузка файла в Google Drive
   const fileData = await googleDriveService(req.file.path);
 
@@ -68,7 +88,7 @@ export const createNotes = async (req, res) => {
   const result = await Notes.create({
     ...req.body,
     owner,
-    fileURL: `https://drive.google.com/uc?export=view&id=${fileData.id}`,
+    fileURL: `https://drive.google.com/uc?export=view&id=${fileData.id}` || null,
   });
 
   res.status(201).json(result);

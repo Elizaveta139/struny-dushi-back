@@ -34,18 +34,8 @@ notesRouter.delete('/:id', authenticate, isValidId, cntrlWrapper(deleteNotes));
 notesRouter.post(
   '/',
   authenticate,
-  // validateBody(createNotesSchema),
-  uploadPdf.single('fileURL'),
-  // (req, res) => {
-  //   console.log('req.body:', req.body); // Проверяем тело запроса
-  //   console.log('req.file:', req.file); // Проверяем файл
-  //   if (!req.file) {
-  //     return res.status(400).send('No file uploaded.');
-  //   }
-
-  //   console.log(req.file.path); // Здесь будет путь к файлу
-  //   res.send('File uploaded successfully');
-  // },
+  uploadPdf.single('file'),
+  validateBody(createNotesSchema),
   cntrlWrapper(createNotes)
 );
 
