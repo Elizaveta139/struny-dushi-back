@@ -46,10 +46,25 @@ export const getOneNotes = async (req, res) => {
 export const deleteNotes = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
+
+  // Найти запись по id
+  const note = await Notes.findById(id);
+
+  //Проверка, существует ли запись и принадлежит ли она текущему пользователю
+  if (!note) {
+    throw HttpError(404, 'Note not found');
+  }
+
+  if (note.owner.toString() !== owner.toString()) {
+    throw HttpError(403, 'You are not authorized to delete this note');
+  }
+
+  // Видаляємо запис
   const result = await Notes.findByIdAndDelete({ owner, _id: id });
   if (!result) {
     throw HttpError(404, 'Not found');
   }
+
   res.status(200).json(result);
 };
 
@@ -60,25 +75,6 @@ export const deleteNotes = async (req, res) => {
 // };
 
 export const createNotes = async (req, res) => {
-  // ValidateSheme();
-
-  // // Если файл был загружен, загружаем его на Google Drive
-  // let fileURL = null;
-  // if (req.file) {
-  //   const fileData = await googleDriveService(req.file.path);
-  //   fileURL = `https://drive.google.com/uc?export=view&id=${fileData.id}`;
-
-  //   // Создание записи в базе данных
-  //   const { _id: owner } = req.user;
-  //   const note = await Notes.create({
-  //     title: req.body.title,
-  //     fileURL: fileURL || req.file.path, // Сохраняем URL файла
-  //     category: req.body.category,
-  //     owner,
-  //   });
-  //   res.status(201).json(note);
-  // }
-
   // Загрузка файла в Google Drive
   const fileData = await googleDriveService(req.file.path);
 
