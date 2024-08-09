@@ -15,6 +15,7 @@ dotenv.config();
 
 ///////////////////
 //////////////////////////////////
+// шаг 1
 
 // const CLIENT_ID = process.env.CLIENT_ID;
 // const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -32,6 +33,7 @@ dotenv.config();
 
 // console.log('Authorize this app by visiting this url:', authUrl);
 
+// шаг 2 обмен на токен
 // async function getToken() {
 //   const { tokens } = await oauth2Client.getToken(code);
 //   console.log('Access Token:', tokens.access_token);
@@ -39,6 +41,7 @@ dotenv.config();
 // }
 
 // getToken();
+//////////////////////////////////////
 
 // MIDDLEWARE =====================
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
