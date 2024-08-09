@@ -1,7 +1,7 @@
 import HttpError from '../helpers/HttpError.js';
 import { Notes } from '../models/notesModel.js';
 import { googleDriveService } from '../service/googleDriveService.js';
-import { ValidateSheme } from '../middlewares/ValidateSheme.js';
+import { userOwnership } from '../helpers/userOwnership.js';
 
 export const getAllNotes = async (req, res) => {
   // const { _id: owner } = req.user; //owner - кожен користувач бачить тільки свої контакти
@@ -47,17 +47,7 @@ export const deleteNotes = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
-  // Найти запись по id
-  const note = await Notes.findById(id);
-
-  //Проверка, существует ли запись и принадлежит ли она текущему пользователю
-  if (!note) {
-    throw HttpError(404, 'Note not found');
-  }
-
-  if (note.owner.toString() !== owner.toString()) {
-    throw HttpError(403, 'You are not authorized to delete this note');
-  }
+  await userOwnership(id, owner, 'You are not authorized to delete this file');
 
   // Видаляємо запис
   const result = await Notes.findByIdAndDelete({ owner, _id: id });
@@ -97,6 +87,9 @@ export const updateNotes = async (req, res) => {
 
   const { _id: owner } = req.user;
   const { id } = req.params;
+
+  await userOwnership(id, owner, 'You do not have permission to edit this file');
+
   const result = await Notes.findByIdAndUpdate(id, { ...req.body, owner }, { new: true });
   if (!result) {
     throw HttpError(404, 'Not found');
@@ -107,6 +100,9 @@ export const updateNotes = async (req, res) => {
 export const updateStatusNotes = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
+
+  await userOwnership(id, owner, 'You do not have permission to edit this file');
+
   const result = await Notes.findByIdAndUpdate(id, { ...req.body, owner }, { new: true });
   if (!result) {
     throw HttpError(404, 'Not found');
