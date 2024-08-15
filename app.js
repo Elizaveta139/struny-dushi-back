@@ -13,7 +13,6 @@ import { globalErrorHandler } from './helpers/globalErrorHandler.js';
 const app = express();
 dotenv.config();
 
-///////////////////
 //////////////////////////////////
 // шаг 1
 
